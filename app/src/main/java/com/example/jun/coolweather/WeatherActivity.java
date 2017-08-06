@@ -210,6 +210,7 @@ public class WeatherActivity extends AppCompatActivity {
         titleUpdateTime.setText(updateTime);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
+        forecastLayout.removeAllViews();
         for(Forecast forecast:weather.forecastList){
             View view= LayoutInflater.from(this).inflate(R.layout.forecast_item,
                     forecastLayout,false);
@@ -222,7 +223,6 @@ public class WeatherActivity extends AppCompatActivity {
             matText.setText(forecast.temperature.max);
             minText.setText(forecast.temperature.min);
             forecastLayout.addView(view);
-
         }
         if(weather.aqi!=null){
             aqiText.setText(weather.aqi.city.aqi);
