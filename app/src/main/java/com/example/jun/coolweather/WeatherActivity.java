@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.jun.coolweather.gson.Forecast;
 import com.example.jun.coolweather.gson.Weather;
+import com.example.jun.coolweather.service.AutoUpdateService;
 import com.example.jun.coolweather.util.HttpUtil;
 import com.example.jun.coolweather.util.Utility;
 
@@ -204,7 +204,6 @@ public class WeatherActivity extends AppCompatActivity {
 
         String cityName=weather.basic.cityName;
         String updateTime=weather.basic.update.updateTime.split(" ")[1];
-        Log.d("updateTime",weather.basic.update.updateTime);
         String degree=weather.now.temperature+"℃";
         String weatherInfo=weather.now.more.info;
         titleCity.setText(cityName);
@@ -236,5 +235,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+
+        Intent in=new Intent(this,AutoUpdateService.class);
+        startService(in);
     }
 }
